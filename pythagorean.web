@@ -1,7 +1,37 @@
 @q pythagorean.web @>
 @q Created by Laurence D. Finston (LDF) Sun 17 Jul 2022 06:14:57 PM CEST @>
 
+@q * (1) Copyright and License.@>
 
+@q Copyright 2022 Laurence D. Finston @>
+
+@q This file is part of Scale_Layouts, a package for generating scale layouts. @>
+
+@q Scale_Layouts is free software; you can redistribute it and/or modify @>
+@q it under the terms of the GNU General Public License as published by @>
+@q the Free Software Foundation; either version 3 of the License, or @>
+@q (at your option) any later version.  @>
+
+@q GNU 3DLDF is distributed in the hope that it will be useful, @>
+@q but WITHOUT ANY WARRANTY; without even the implied warranty of @>
+@q MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the @>
+@q GNU General Public License for more details.  @>
+
+@q You should have received a copy of the GNU General Public License @>
+@q along with GNU 3DLDF; if not, write to the Free Software @>
+@q Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA@>
+
+@q ("@@" stands for a single at-sign in the following paragraph.) @>
+
+@q Please send bug reports to Laurence.Finston@@gmx.de@>
+
+@q The author can be contacted at: @>
+
+@q Laurence D. Finston                 @>
+@q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
+
+
+@q * (1) @>
 @
 @<Include files@>=
 #include <stdlib.h>
