@@ -51,16 +51,66 @@
 #include <limits>
 #include <cfloat>
 
-using namespace std;
+#include <mysql.h>
 
 #include "pythagorean.hxx"
 
+using namespace std;
+
+
+@q * (1) @>
+@
+@<Global variables@>=
+MYSQL_RES *result = 0;
+MYSQL_ROW curr_row = 0;
+MYSQL *mysql;
+  
+unsigned int row_ctr = 0; 
+unsigned int field_ctr = 0;
+long affected_rows = 0;
+
+
+@q * (1) @>
 @
 @<|main| definition@>=
 int
 main(int argc, char *argv[])
 {
+   bool DEBUG = true; /* |false|  */
+
+
    printf("Entering `main'.\n");
+
+   mysql = mysql_init(0);
+
+   if (mysql != 0)
+     {
+       if (DEBUG) 
+	 cerr << "mysql_init succeeded." << endl;
+     }
+   else
+     {
+       cerr << "ERROR!  In `main': `mysql_init failed'." << endl
+	    << "Exiting `songlist' unsuccessfully with exit status 1."
+	    << endl;
+
+       exit(1);
+     }
+
+   unsigned int mysql_timeout = 120;
+  
+   // mysql_options(mysql, MYSQL_OPT_RECONNECT, 0);
+
+   mysql_options(mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
+  
+   if (!mysql_real_connect(mysql,"localhost","songlist",0,"Songs",0,NULL,0))
+   {
+      fprintf(stderr, "Failed to connect to database: Error: %s\n",
+              mysql_error(mysql));
+   }
+
+
+
 
    cerr << "argc == " << argc << endl;
 
@@ -71,11 +121,10 @@ main(int argc, char *argv[])
 
    int status = pythagorean(static_cast<float>(atof(argv[1])));
 
+   mysql_close(mysql);
+   mysql_library_end();
  
    printf("Exiting `main' successfully with return value 0.\n");
-
-
-
    
    return 0;
 
@@ -84,6 +133,7 @@ main(int argc, char *argv[])
 @
 @c
 @<Include files@>@;
+@<Global variables@>@;
 @<|main| definition@>@;
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>

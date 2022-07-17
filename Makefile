@@ -46,17 +46,17 @@ main.cxx: main.web pythagorean.hxx
 pythagorean.cxx pythagorean.hxx: pythagorean.web
 	$(CTANGLE) $< - $@
 
-layout$(EXEEXT): main.o pythagorean.o
-	g++ -o $@ $^
+layout$(EXEEXT): main.o pythagorean.o 
+	g++ -o $@ $^ -lm -lmysqlclient
 
 main.o: main.cxx
-	g++ -c -g $<
+	g++ -c -g -I/usr/include/mysql $<
 
 pythagorean.o: pythagorean.cxx
-	g++ -c -g $<
+	g++ -c -g -I/usr/include/mysql $<
 
 
-pythagorean$(EXEEXT): main.o pythagorean.o
+pythagorean$(EXEEXT): main.o pythagorean.o -lm -lmysqlclient
 	g++ -o $@ $^
 
 
