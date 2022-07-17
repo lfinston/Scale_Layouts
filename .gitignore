@@ -5,5 +5,7 @@
 *.o
 *.cxx
 *.dvi
+*.hxx
 *.log
+layout
 pythagorean
