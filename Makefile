@@ -52,4 +52,4 @@ pythagorean.o: pythagorean.cxx
 
 .PHONY: run
 run: pythagorean$(EXEEXT)
-	pythagorean$(EXEEXT) 45
+	pythagorean$(EXEEXT) 440
