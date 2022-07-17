@@ -1,0 +1,7 @@
+#### .gitignore
+#### Created by Laurence D. Finston (LDF) Sun 17 Jul 2022 06:38:47 PM CEST
+
+*.o
+*.cxx
+*.dvi
+*.log
