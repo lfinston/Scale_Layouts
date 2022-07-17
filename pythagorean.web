@@ -116,7 +116,7 @@ main(int argc, char *argv[])
         << "third               == " << third << endl
         << "maj_seventh         == " << maj_seventh << endl
         << "aug_fourth          == " << aug_fourth << endl
-        << "octave_prime        == " << octave_prime << endl
+        // << "octave_prime        == " << octave_prime << endl
         << endl;        
 
    float limit = 2*unison;
@@ -139,8 +139,8 @@ main(int argc, char *argv[])
    while (aug_fourth > limit)
       aug_fourth /= 2.0F;
 
-   while (octave_prime > limit + 100)
-      octave_prime /= 2.0F;
+   /* while (octave_prime > limit + 100) */
+   /*    octave_prime /= 2.0F; */
 
    while (perfect_fourth < unison)
       perfect_fourth *= 2.0F;
@@ -176,7 +176,7 @@ main(int argc, char *argv[])
         << "sixth               == " << sixth << endl
         << "min_seventh         == " << min_seventh << endl
         << "maj_seventh         == " << maj_seventh << endl
-        << "octave_prime        == " << octave_prime << endl
+        // << "octave_prime        == " << octave_prime << endl
         << endl;
 
    printf("Exiting `main' successfully with return value 0.\n");
