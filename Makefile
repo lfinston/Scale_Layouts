@@ -40,16 +40,26 @@
 #### $*:  The stem with which an implicit rule matches
 
 
-pythagorean.cxx: pythagorean.web
+main.cxx: main.web pythagorean.hxx
 	$(CTANGLE) $< - $@
 
-pythagorean$(EXEEXT): pythagorean.o
+pythagorean.cxx pythagorean.hxx: pythagorean.web
+	$(CTANGLE) $< - $@
+
+layout$(EXEEXT): main.o pythagorean.o
 	g++ -o $@ $^
+
+main.o: main.cxx
+	g++ -c -g $<
 
 pythagorean.o: pythagorean.cxx
 	g++ -c -g $<
 
 
+pythagorean$(EXEEXT): main.o pythagorean.o
+	g++ -o $@ $^
+
+
 .PHONY: run
-run: pythagorean$(EXEEXT)
-	pythagorean$(EXEEXT) 440
+run: layout$(EXEEXT)
+	layout$(EXEEXT) 440

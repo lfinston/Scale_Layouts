@@ -53,22 +53,17 @@
 using namespace std;
 
 @
-@<|main| definition@>=
+@<|pythagorean| declaration@>=
 int
-main(int argc, char *argv[])
+pythagorean(float unison = 440.0);
+
+@
+@<|pythagorean| definition@>=
+int
+pythagorean(float unison)
+
 {
-   printf("Entering `main'.\n");
-
-   cerr << "argc == " << argc << endl;
-
-   for (int i = 0; i < argc; ++i)
-   {
-      cerr << "argv[" << i << "] == " << argv[i] << endl;
-   }
-
-   cerr << endl;
-
-   float unison = 0.0F;
+   printf("Entering `pythagorean'.\n");
 
    float fifth;
    float second;
@@ -84,7 +79,6 @@ main(int argc, char *argv[])
    float dim_fifth;
    float octave_prime;
 
-   unison = static_cast<float>(atof(argv[1]));
    fifth = unison * 3.0F/2.0F;
    second = fifth * 3.0F/2.0F;
    sixth = second * 3.0F/2.0F;
@@ -169,8 +163,8 @@ main(int argc, char *argv[])
         << "min_third           == " << min_third << endl
         << "third               == " << third << endl
         << "perfect_fourth      == " << perfect_fourth << endl
-        << "aug_fourth          == " << aug_fourth << endl
         << "dim_fifth           == " << dim_fifth << endl
+        << "aug_fourth          == " << aug_fourth << endl
         << "fifth               == " << fifth << endl
         << "min_sixth           == " << min_sixth << endl
         << "sixth               == " << sixth << endl
@@ -179,17 +173,21 @@ main(int argc, char *argv[])
         // << "octave_prime        == " << octave_prime << endl
         << endl;
 
-   printf("Exiting `main' successfully with return value 0.\n");
+   printf("Exiting `pythagorean' successfully with return value 0.\n");
 
    
    return 0;
 
-} /* End of |main| definition.  */
+} /* End of |pythagorean| definition.  */
 
 @
 @c
 @<Include files@>@;
-@<|main| definition@>@;
+@<|pythagorean| definition@>@;
+
+@ 
+@(pythagorean.hxx@>=
+@<|pythagorean| declaration@>@;
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
