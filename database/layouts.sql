@@ -22,3 +22,16 @@
 
 /* Please send bug reports to Laurence.Finston@gmx.de */
 
+create database Scale_Layouts;
+
+show databases;
+
+use Scale_Layouts;
+
+show tables;
+
+create table Tuning_Systems
+(
+    id int unsigned not null default 0 unique
+);
+
