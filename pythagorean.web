@@ -139,7 +139,7 @@ main(int argc, char *argv[])
    while (aug_fourth > limit)
       aug_fourth /= 2.0F;
 
-   while (octave_prime > limit + limit/10.0F)
+   while (octave_prime > limit + 100)
       octave_prime /= 2.0F;
 
    while (perfect_fourth < unison)
