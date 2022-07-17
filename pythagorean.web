@@ -1,0 +1,49 @@
+@q pythagorean.web @>
+@q Created by Laurence D. Finston (LDF) Sun 17 Jul 2022 06:14:57 PM CEST @>
+
+
+@
+@<Include files@>=
+#include <stdlib.h>
+#include <cstdio>
+#include <float.h>
+#include <iomanip>
+#include <ios>
+#include <iostream>
+#include <iterator>
+#include <math.h>
+#include <new>
+#include <sstream>
+#include <vector>
+#include <string>
+#include <limits.h>
+#include <limits>
+#include <cfloat>
+
+using namespace std;
+
+@
+@<|main| definition@>=
+int
+main(int argc, char *argv[])
+{
+   printf("Entering `main'.\n");
+
+   cerr << "argc == " << argc << endl;
+
+   for (int i = 0; i < argc; ++i)
+   {
+      cerr << "argv[" << i << "] == " << argv[i] << endl;
+   }
+
+   printf("Exiting `main' successfully with return value 0.\n");
+
+   
+   return 0;
+
+} /* End of |main| definition.  */
+
+@
+@c
+@<Include files@>@;
+@<|main| definition@>@;
