@@ -1,0 +1,145 @@
+@<GCC command line option processing@>=
+{
+  bool DEBUG = true; /* |false| */ 
+  int option_ctr;
+  int digit_optind = 0;
+ 
+@q *** (3) Index constants.@>
+@*2 Index constants.
+
+@<GCC command line option processing@>=
+
+  const unsigned short PYTHAGOREAN_INDEX               =  0;
+  const unsigned short EQUAL_TEMPERAMENT_INDEX         =  1;
+  const unsigned short WERCKMEISTER_3_INDEX            =  2;
+
+@q *** Option struct.@>
+@ Option struct.
+
+\LOG
+\initials{LDF 2004.09.30.}
+Added the ``\.{--quiet}'' option.
+\ENDLOG 
+
+@<GCC command line option processing@>=
+
+  static struct option long_options[] = {
+    {"pythagorean", 0, 0, 0},
+    {"equal-temperament", 0, 0, 0},
+    {"werckmeister3", 0, 0, 0},
+    {0, 0, 0, 0}
+  };
+  
+  int option_index = 0;
+  int this_option_optind = optind ? optind : 1;  
+
+@q *** (3) Loop for handling options.@>
+@*2 Loop for handling options.
+
+@<GCC command line option processing@>=
+
+  while (1) {
+
+    option_ctr = getopt_long_only(argc, argv, "",
+                          long_options, &option_index);
+#if 1 
+    if (DEBUG)
+      {
+        cerr << "option_ctr == " << option_ctr << endl;
+        cerr << "option_index == " << option_index << endl;
+        if (optarg)
+          cerr << "optarg == " << optarg << endl;
+      }
+#endif     
+
+    if (option_ctr == -1)
+      {
+        if (DEBUG)
+          cerr << "No more option arguments." << endl << endl ;
+        break;
+      }
+
+    if (option_ctr == 0)
+      {
+        if (DEBUG)
+          {
+            cerr << "option " << long_options[option_index].name;
+            if (optarg)
+              cerr << " with arg " << optarg;
+            cerr << endl;
+          }
+
+@q **** (4) pythagorean.@>
+@ pythagorean.
+
+\LOG
+\initials{LDF 2004.11.01.}
+Added this section.
+\ENDLOG
+
+@<GCC command line option processing@>=
+
+        if (option_index == BISON_TRACE_INDEX)
+          {
+             bison_trace = true;
+
+          } /* |if (option_index == BISON_TRACE_INDEX)|  */
+
+@q **** (4) Invalid option_index value.@>
+@ Invalid {\tt option\_index} value.
+
+@<GCC command line option processing@>=
+
+        else 
+          {
+            cerr << "This can't happen! "
+                 << "option_index has invalid value: "
+                 << option_index << endl
+                 << "Will try to continue." 
+                 << endl << endl ;
+          }
+      }
+
+@q **** (4) Ambiguous option.@>
+@ Ambiguous option.
+
+@<GCC command line option processing@>=
+
+    else if (option_ctr == '?')
+    {
+        cerr << "`getopt_long_only' returned ambiguous match. Breaking."
+             << endl << endl ;
+        break;
+    }
+
+@q **** (4) Invalid option.@>
+@ Invalid option.
+
+@<GCC command line option processing@>=
+
+    else
+      {
+        cerr << "getopt_long() returned invalid option."
+             << endl ;
+      }
+
+@q **** (4) End of while loop.@>
+@ End of while loop.
+
+@<GCC command line option processing@>=
+
+    if (DEBUG) 
+      cerr << "*********************\n\n";
+    } /* |while|  */
+
+
+#if 0 
+  if (DEBUG)
+    {
+      cerr << "Exiting. (Debugging command line option processing.)" 
+           << endl << endl ;
+      exit(0);
+    }
+#endif 
+
+} /* End of group.  */
