@@ -62,4 +62,4 @@ pythagorean$(EXEEXT): main.o pythagorean.o -lm -lmysqlclient
 
 .PHONY: run
 run: layout$(EXEEXT)
-	layout$(EXEEXT) 440
+	layout$(EXEEXT) -w 440
