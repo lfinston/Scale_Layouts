@@ -40,26 +40,24 @@
 #### $*:  The stem with which an implicit rule matches
 
 
-main.cxx: main.web pythagorean.hxx
+main.cxx: main.web pythagorean.hxx equal_temperament.hxx werckmeister3.hxx
 	$(CTANGLE) $< - $@
 
-pythagorean.cxx pythagorean.hxx: pythagorean.web
+%.cxx %.hxx: %.web
 	$(CTANGLE) $< - $@
 
-layout$(EXEEXT): main.o pythagorean.o 
+layout$(EXEEXT): main.o pythagorean.o equal_temperament.o werckmeister3.o
 	g++ -o $@ $^ -lm -lmysqlclient
 
-main.o: main.cxx
+%.o: %.cxx
 	g++ -c -g -I/usr/include/mysql $<
-
-pythagorean.o: pythagorean.cxx
-	g++ -c -g -I/usr/include/mysql $<
-
-
-pythagorean$(EXEEXT): main.o pythagorean.o -lm -lmysqlclient
-	g++ -o $@ $^
-
 
 .PHONY: run
+
 run: layout$(EXEEXT)
-	layout$(EXEEXT) -w 440
+	layout$(EXEEXT) -p 440
+
+.PHONY: clean
+
+clean:
+	rm -f *.cxx *.hxx *.o *.log 

@@ -56,6 +56,8 @@
 #include <mysql.h>
 
 #include "pythagorean.hxx"
+#include "equal_temperament.hxx"
+#include "werckmeister3.hxx"
 
 using namespace std;
 
@@ -334,15 +336,6 @@ getchar();
       }
 
    } /* |if (optind < argc)| */
-
-#if 1 
-  if (DEBUG)
-    {
-      cerr << "Exiting. (Debugging command line option processing.)" 
-           << endl << endl ;
-      exit(0);
-    }
-#endif 
 
 } /* End of group.  */
 
