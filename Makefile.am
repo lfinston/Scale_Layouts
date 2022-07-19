@@ -39,7 +39,7 @@
 #### $^:  The names of all the prerequisites, with spaces between them.
 #### $*:  The stem with which an implicit rule matches
 
-.SECONDARY
+.SECONDARY:
 
 main.cxx: main.web pythagorean.hxx equal_temperament.hxx werckmeister3.hxx
 	$(CTANGLE) $< - $@
@@ -60,6 +60,9 @@ tp: turkish_tuning.pdf
 turkish_tuning.dvi: turkish_tuning.tex turkish_tuning.eps
 
 %.dvi: %.tex
+	$(TEX) $<
+
+%.dvi: %.txt
 	$(TEX) $<
 
 %.pdf: %.dvi
