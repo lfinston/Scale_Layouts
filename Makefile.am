@@ -41,17 +41,16 @@
 
 .SECONDARY:
 
-main.cxx: main.web pythagorean.hxx equal_temperament.hxx werckmeister3.hxx
-	$(CTANGLE) $< - $@
-
 %.cxx %.hxx: %.web
-	$(CTANGLE) $< - $@
+	$(CTANGLE) $< - $*.cxx
+
+%.o: %.cxx %.hxx
+	g++ -c -g -I/usr/include/mysql $<
+
+main.o: main.cxx pythagorean.hxx equal_temperament.hxx werckmeister3.hxx
 
 layout$(EXEEXT): main.o pythagorean.o equal_temperament.o werckmeister3.o
 	g++ -o $@ $^ -lm -lmysqlclient
-
-%.o: %.cxx
-	g++ -c -g -I/usr/include/mysql $<
 
 .PHONY: tp
 
@@ -72,7 +71,7 @@ turkish_tuning.dvi: turkish_tuning.tex turkish_tuning.eps
 .PHONY: run
 
 run: layout$(EXEEXT)
-	layout$(EXEEXT) -e 65
+	layout$(EXEEXT) -e 65 19
 
 .PHONY: clean
 
