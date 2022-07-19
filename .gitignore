@@ -15,5 +15,6 @@
 *.mf
 *.mp
 *.xcf
+autom4te.cache/
 layout
 pythagorean
