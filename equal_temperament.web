@@ -55,14 +55,18 @@ using namespace std;
 @
 @<|equal_temperament| declaration@>=
 int
-equal_temperament(float scale_length = 65);
+equal_temperament(float scale_length = 65, int fret_ctr = 19);
 
 @
 @<|equal_temperament| definition@>=
 int
-equal_temperament(float scale_length)
+equal_temperament(float scale_length, int fret_ctr)
 {
    printf("Entering `equal_temperament'.\n");
+
+   cerr << "scale_length == " << scale_length << endl;
+   cerr << "fret_ctr     == " << fret_ctr << endl;
+
 
    float alpha = powf(2.0, 1.0F/12.0F);
 
@@ -72,25 +76,36 @@ equal_temperament(float scale_length)
 
    cerr << "a == " << a << endl;
 
+   float n[200];
+
+   for (int i = 0; i < 100; ++i)
+      n[i] = 0.0F;
+
+   n[1]   = scale_length * a; 
+   n[101] = scale_length - n[1];
+
+   cerr << setprecision(32) 
+        << "n[1]          == " << n[1] << endl
+        << "n[101]        ==  " << n[101] << endl
+        << "n[1] + n[101] == " << n[1] + n[101] << endl;
+
+   string s;
+   s = "  ";
+
+   for (int i = 2; i <= fret_ctr; ++i)
+   {
+      n[i] = n[i-1] * a;
+      n[100+i] = n[i-1] - n[i];
+      cerr << "n[" << i << "] " << s << "== " << n[i] << endl
+           << "n[" << (100+i) << "] ==  " << n[100+i] << endl;
+  
+      if (i == 9)
+         s = " ";
+   }
+
+
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
-
-   float fifth;
-   float second;
-   float sixth;
-   float third;
-   float maj_seventh;
-   float aug_fourth;
-   float perfect_fourth;
-   float min_seventh;
-   float min_third;
-   float min_sixth;
-   float min_second;
-   float dim_fifth;
-   float octave;
-
-  
-
 
 
    printf("Exiting `equal_temperament' successfully with return value 0.\n");
