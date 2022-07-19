@@ -117,8 +117,6 @@ main(int argc, char *argv[])
    }
 
 
-
-
    cerr << "argc == " << argc << endl;
 
    for (int i = 0; i < argc; ++i)
@@ -135,7 +133,10 @@ main(int argc, char *argv[])
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
 
-   int status = pythagorean(static_cast<float>(atof(argv[1])));
+   int status = equal_temperament(static_cast<float>(atof(argv[1])));
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
    mysql_close(mysql);
    mysql_library_end();
@@ -316,9 +317,6 @@ Added the ``\.{--quiet}'' option.
 
 cerr << "argc == " << argc << endl;
 cerr << "optind == " << optind << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar();         
 
   if (optind < argc)
   {

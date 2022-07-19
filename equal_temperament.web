@@ -55,15 +55,25 @@ using namespace std;
 @
 @<|equal_temperament| declaration@>=
 int
-equal_temperament(float unison = 440.0);
+equal_temperament(float scale_length = 65);
 
 @
 @<|equal_temperament| definition@>=
 int
-equal_temperament(float unison)
-
+equal_temperament(float scale_length)
 {
    printf("Entering `equal_temperament'.\n");
+
+   float alpha = powf(2.0, 1.0F/12.0F);
+
+   cerr << "alpha == " << alpha << endl;
+
+   float a = 1.0F/alpha;
+
+   cerr << "a == " << a << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
    float fifth;
    float second;
@@ -77,25 +87,11 @@ equal_temperament(float unison)
    float min_sixth;
    float min_second;
    float dim_fifth;
-   float octave_prime;
+   float octave;
+
+  
 
 
-
-   cerr << "unison              == " << unison << endl
-        << "min_second          == " << min_second << endl
-        << "second              == " << second << endl
-        << "min_third           == " << min_third << endl
-        << "third               == " << third << endl
-        << "perfect_fourth      == " << perfect_fourth << endl
-        << "dim_fifth           == " << dim_fifth << endl
-        << "aug_fourth          == " << aug_fourth << endl
-        << "fifth               == " << fifth << endl
-        << "min_sixth           == " << min_sixth << endl
-        << "sixth               == " << sixth << endl
-        << "min_seventh         == " << min_seventh << endl
-        << "maj_seventh         == " << maj_seventh << endl
-        // << "octave_prime        == " << octave_prime << endl
-        << endl;
 
    printf("Exiting `equal_temperament' successfully with return value 0.\n");
 

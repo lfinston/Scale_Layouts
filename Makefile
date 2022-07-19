@@ -52,10 +52,23 @@ layout$(EXEEXT): main.o pythagorean.o equal_temperament.o werckmeister3.o
 %.o: %.cxx
 	g++ -c -g -I/usr/include/mysql $<
 
+.PHONY: tp
+
+tp: turkish_tuning.pdf
+
+turkish_tuning.dvi: turkish_tuning.tex turkish_tuning.eps
+
+%.dvi: %.tex
+	$(TEX) $<
+
+%.pdf: %.dvi
+	dvipdfmx $<
+
+
 .PHONY: run
 
 run: layout$(EXEEXT)
-	layout$(EXEEXT) -p 440
+	layout$(EXEEXT) -e 65
 
 .PHONY: clean
 
