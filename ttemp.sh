@@ -3,3 +3,4 @@
 
 cp -f bibliography.txt ~/www/personal/SRC_CODE/Scale_Layouts
 cp -f bibliography.pdf ~/www/personal/graphics/Scale_Layouts
+
