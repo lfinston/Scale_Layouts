@@ -77,14 +77,23 @@ bool do_pythagorean = false;
 bool do_equal_temperament = false;
 bool do_werckmeister3 = false;
 
+vector<string> non_option_args;
+
+float scale_length = 0.0F;
+float fret_ctr     = 0.0F;
+float frequency    = 0.0F;
+
 @q * (1) @>
 @
 @<|main| definition@>=
 int
 main(int argc, char *argv[])
 {
+@q ** (2) @>
+
    bool DEBUG = true; /* |false|  */
 
+   int status = 0;
 
    printf("Entering `main'.\n");
 
@@ -98,7 +107,7 @@ main(int argc, char *argv[])
    else
      {
        cerr << "ERROR!  In `main': `mysql_init failed'." << endl
-	    << "Exiting `songlist' unsuccessfully with exit status 1."
+	    << "Exiting `layout' unsuccessfully with exit status 1."
 	    << endl;
 
        exit(1);
@@ -110,7 +119,7 @@ main(int argc, char *argv[])
 
    mysql_options(mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
   
-   if (!mysql_real_connect(mysql,"localhost","songlist",0,"Songs",0,NULL,0))
+   if (!mysql_real_connect(mysql,"localhost", "scale_layouts", 0, "Scale_Layouts", 0, NULL, 0))
    {
       fprintf(stderr, "Failed to connect to database: Error: %s\n",
               mysql_error(mysql));
@@ -128,15 +137,55 @@ main(int argc, char *argv[])
 
    cerr << "do_pythagorean == " << do_pythagorean << endl
         << "do_equal_temperament == " << do_equal_temperament << endl
-        << "do_werckmeister3 == " << do_werckmeister3 << endl;
+        << "do_werckmeister3 == " << do_werckmeister3 << endl
+        << "optind == " << optind << endl;
+
+
+   cerr << "argv[2] == " << argv[2] << endl
+        << "argv[3] == " << argv[3] << endl
+        << "non_option_args.size() == " << non_option_args.size() 
+        << endl;
+
+   for (vector<string>::iterator iter = non_option_args.begin();
+        iter != non_option_args.end();
+        ++iter)
+   {
+       cerr << "*iter == " << *iter << endl;
+   }
+
+   if (non_option_args.size() > 0)
+      scale_length = static_cast<float>(atof(non_option_args[0].c_str()));
+   else 
+      scale_length = 65;
+
+   if (non_option_args.size() > 1)
+      fret_ctr = static_cast<float>(atof(non_option_args[1].c_str()));
+   else 
+      fret_ctr = 19;
+
+   if (non_option_args.size() > 2 && frequency == 0.0F)
+      frequency = static_cast<float>(atof(non_option_args[2].c_str()));
+   else 
+      frequency = 440.0;
+
+   cerr << "scale_length == " << scale_length << endl
+        << "fret_ctr     == " << fret_ctr << endl
+        << "frequency    == " << frequency << endl;
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
 
-   int status = equal_temperament(static_cast<float>(atof(argv[1])));
+
+   if (do_equal_temperament)
+   {
+      status = equal_temperament(scale_length, fret_ctr);
+      cerr << "status == " << status << endl;
+
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
+
+   }  /* |if (do_equal_temperament)|  */
 
    mysql_close(mysql);
    mysql_library_end();
@@ -175,7 +224,7 @@ Added the ``\.{--quiet}'' option.
 @<GCC command line option processing@>=
 
   static struct option long_options[] = {
-    {"pythagorean", 0, 0, 0},
+    {"pythagorean", 1, 0, 0},
     {"equal-temperament", 0, 0, 0},
     {"werckmeister3", 0, 0, 0},
     {0, 0, 0, 0}
@@ -230,6 +279,14 @@ Added the ``\.{--quiet}'' option.
             cerr << "pythagorean." << endl;
 
             do_pythagorean = true;
+
+            frequency = static_cast<float>(atof(optarg));
+
+            cerr << "frequency == " << frequency << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
 
         } /* |if (option_index == PYTHAGOREAN_INDEX)|  */
 
@@ -327,6 +384,8 @@ cerr << "optind == " << optind << endl;
 
       for (; optind < argc; ++optind)
       {
+          non_option_args.push_back(argv[optind]);
+
           if (DEBUG)
           {
              cerr << "argv[" << optind << "] == " << argv[optind] << endl ;

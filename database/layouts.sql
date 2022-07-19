@@ -24,6 +24,10 @@
 
 create database Scale_Layouts;
 
+create user 'scale_layouts'@'localhost';
+
+GRANT ALL ON Scale_Layouts TO 'scale_layouts'@'localhost';
+
 show databases;
 
 use Scale_Layouts;
