@@ -42,12 +42,12 @@
 \hsize=210mm
 
 \advance\voffset by -1in
-\advance\voffset by .5cm
+\advance\voffset by 1.125cm
 \advance\hoffset by -1in
 \advance\hoffset by 1cm
 
 \advance\vsize by -.5cm
-\advance\hsize by -1cm
+\advance\hsize by -2cm
 
 \parindent=0pt
 
@@ -55,19 +55,78 @@
 \hlopts{bwidth=0}
 
 \font\largerm=cmr10  scaled \magstephalf
-\font\largebf=cmbx10 scaled \magstephalf
+\font\elevenrm=cmr10  scaled \magstephalf
+\font\largerm=cmr12 
+\font\elevenbf cmbx10 scaled \magstephalf
+\font\largebf=cmbx12
+\font\small=cmr9
+\font\smalltt=cmtt9
 
 \def\epsfsize#1#2{#1}
 
 %% * (1)
 
-\centerline{{\largebf Scale Layouts}}
+%% * (1) Bibliography
+
+%% ** (2) Copyright and License Notice
+
+\pageno=-1
+
+\begingroup
+%\advance\hsize by -1cm
+%\advance\hoffset by .25cm
+\parskip=.5\baselineskip
+\centerline{{\largebf Scale Layouts---Bibliography}}
+\vskip\baselineskip
+
+\small
+Copyright (C) 2022 Laurence Finston
+
+\setbox0=\hbox{Last updated:\quad}
+
+\leavevmode\hbox to \wd0{Created:\hfil}July 19, 2022
+
+\leavevmode\box0 July 19, 2022 %% Updated
+
+You can redistribute this file and/or modify 
+it under the terms of the GNU General Public License as published by 
+the Free Software Foundation; either version 3 of the License, or 
+(at your option) any later version. 
+
+This file is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details. 
+
+You should have received a copy of the GNU General Public License 
+along with This file; if not, write to the Free Software Foundation, Inc.,
+51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+See the GNU Free Documentation License for the copying conditions 
+that apply to this document.
+
+You should have received a copy of the GNU Free Documentation License 
+along with this file; if not, write to the Free Software 
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+The author can be contacted at:
+
+Laurence Finston\hfil\break
+{\smalltt Laurence.Finston@gmx.de}
+\endgroup
 \vskip2\baselineskip
+\centerline{{\bf SEE FOLLOWING PAGE.}}
+\vfil\eject
 
 %% ** (2) Bibliography
 
-\centerline{{\bf Bibliography}}
+\headline={\hfil {\rm Scale Layouts}\hfil\llap{{\tt \timestamp}}}
 
+\pageno=1
+
+\vbox{}
+\vskip\baselineskip
+\centerline{{\largebf Bibliography}}
 
 \vfil\eject
 
