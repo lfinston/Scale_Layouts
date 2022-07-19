@@ -5,7 +5,15 @@
 *.o
 *.cxx
 *.dvi
+*.eps
 *.hxx
+*.jpg
+*.JPG
 *.log
+*.pdf
+*.ps
+*.mf
+*.mp
+*.xcf
 layout
 pythagorean
