@@ -17,4 +17,5 @@
 *.xcf
 autom4te.cache/
 layout
+Makefile
 pythagorean
