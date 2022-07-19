@@ -39,6 +39,7 @@
 #### $^:  The names of all the prerequisites, with spaces between them.
 #### $*:  The stem with which an implicit rule matches
 
+.SECONDARY
 
 main.cxx: main.web pythagorean.hxx equal_temperament.hxx werckmeister3.hxx
 	$(CTANGLE) $< - $@

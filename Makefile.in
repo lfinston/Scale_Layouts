@@ -691,6 +691,8 @@ uninstall-am:
 .PRECIOUS: Makefile
 
 
+.SECONDARY
+
 main.cxx: main.web pythagorean.hxx equal_temperament.hxx werckmeister3.hxx
 	$(CTANGLE) $< - $@
 
