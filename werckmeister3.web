@@ -80,19 +80,19 @@ werckmeister3(float scale_length, int fret_ctr)
 
     float unit_size = 0.0F;
 
-    /* uunit_size is a value found by generating a scale and then dividing
+    /* unit_size is a value found by generating a scale and then dividing
        in order to get it to fit into the desired scale length.
        \initials{LDF 2022.07.20.}  */
     
-    unit_size := scale_length / (2 * 8.4430);
+    unit_size = scale_length / (2 * 8.4430);
 
     bool do_labels;
 
     do_labels = false; /* |true|  */
     
-    if (fret_ctr > 12)
+    if (fret_ctr != 12)
     {
-       cerr << "WARNING!  `fret_ctr' == " << fret_ctr << " (> 12):" << endl
+       cerr << "WARNING!  `fret_ctr' == " << fret_ctr << " (!= 12):" << endl
             << "This is currently not permitted." << endl 
             << " Resetting `fret_ctr' to 12 and continuing." << endl
             << "Enter <RETURN> to continue: ";
@@ -104,65 +104,71 @@ werckmeister3(float scale_length, int fret_ctr)
     cerr << "scale_length == " << scale_length << endl;
     cerr << "unit_size    == " << unit_size << endl;
 
-    float a[12];
+    float a[13];
+    float a_inverse[13];
+    float b[13];
 
+
+    for (int i = 0; i <= 12; ++i)
+    {
+       a[i] = b[i] = a_inverse[i] = 0.0F;
+    }
+          
     a[0]  = 1;
-    a[1]  = 256/243;
-    a[2]  = (64/81);
-    a[2]  *= (sqrt 2);
-    a[3]  = 32/27;
-    a[4]  = 256/243;
-    a[4]  *= 2 root 4;
-    a[5]  = 4/3;
-    a[6]  = 1024/729;
+    a[1]  = 256.0F/243.0F;
+    a[2]  = (64.0F/81.0F);
+    a[2]  *= sqrt(2.0F);
+    a[3]  = 32.0F/27.0F;
+    a[4]  = 256.0F/243.0F;
+    a[4]  *= pow(2.0F, 1.0F/4.0F);
+    a[5]  = 4.0F/3.0F;
+    a[6]  = 1024.0F/729.0F;
 
-    a[7]  = 8 root 4; %% 8 == 2 pow 3;
-    a[7]  *= 8/9;
+    a[7]  = (8.0F/9.0F) * pow(8.0F, 1.0F/4.0F); /* $8 = 2^3$  */
 
-    a[8] = 128/81;
+    a[8] = 128.0F/81.0F;
 
-    a[9] = 1024/729;
-    a[9] *= 2 root 4;
+    a[9] = 1024.0F/729.0F * pow(2.0F, 1/4.0F);
 
-    a[10] = 16/9;
+    a[10] = 16.0F/9.0F;
 
-    a[11] = 2 root 4;
-    a[11] *= 128/81;
+    a[11] = 128.0F/81.0F * pow(2.0F, 1/4.0F);
 
-    a[12] = 2;
+    a[12] = 2.0F;
 
-    p0 = origin;
+    a_inverse[0] = 1.0F;
 
-    if do_labels:
-      dotlabel.lft("$p_0$", p0);
-    fi
-
-    label.top("Nut", p0) shifted (0, .25cm);
-    draw (p0 shifted (-.25cm, 0)) -- (p0 shifted (.25cm, 0));
-    label.lft("\setbox0=\hbox{\quad 0}Unison\hbox to \wd0{\hss}", p0) shifted (-.25cm, 0);
-    
-    
-    q0 += --;
-    q0 += p0;
-
-    a_inverse0 = 1;
-
-    numeric shift_val;
-    shift_val = .25cm;
-    
-    for i = 1 upto 12:
-      message "a" & decimal i & " = " & decimal a[i];
+    for (int i = 1; i <= 12; ++i)
+    {
       a_inverse[i] = 1/a[i];
-      message "a_inverse" & decimal i & " = " & decimal a_inverse[i];
-      p[i] = p[i-1] shifted (0, -unit_size * a_inverse[i]);
-      q0 += p[i];
-      if do_labels:
-	dotlabel.lft("$p_{" & decimal i & "}$", p[i]);
-      fi
-    endfor;
+      b[i] = unit_size * a_inverse[i];
+    }
 
+    for (int i = 1; i <= 12; ++i)
+    {
+      cerr << "a[" << i << "] = " << a[i] << endl
+           << "a_inverse[" << i << "] = " << a_inverse[i] << endl;
+    }
 
+    cerr << endl;
 
+    float b_sum = 0.0F;
+
+    for (int i = 1; i <= 12; ++i)
+    {
+      b_sum += b[i];
+      cerr << "b[" << i << "] = " << b[i] << endl;
+    }     
+
+    cerr << "b_sum        == " << b_sum << endl 
+         << "2 * b_sum    == " << 2*b_sum << endl 
+         << "scale_length == " << scale_length << endl 
+         << endl << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+#if 0
    float fifth;
    float second;
    float sixth;
@@ -176,8 +182,6 @@ werckmeister3(float scale_length, int fret_ctr)
    float min_second;
    float dim_fifth;
    float octave_prime;
-
-
 
    cerr << "unison              == " << unison << endl
         << "min_second          == " << min_second << endl
@@ -194,6 +198,8 @@ werckmeister3(float scale_length, int fret_ctr)
         << "maj_seventh         == " << maj_seventh << endl
         // << "octave_prime        == " << octave_prime << endl
         << endl;
+
+#endif 
 
 @q **** (4) @>
 

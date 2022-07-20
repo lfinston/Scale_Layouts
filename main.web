@@ -176,20 +176,44 @@ cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
 
 
+
+@q ** (2) @>
+
+@q *** (3) @>
+
    if (do_equal_temperament)
    {
       status = equal_temperament(scale_length, fret_ctr);
+
       cerr << "status == " << status << endl;
-
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
    }  /* |if (do_equal_temperament)|  */
 
+@q *** (3) @>
+
+   if (do_werckmeister3)
+   {
+      status = werckmeister3(scale_length, fret_ctr);
+
+      cerr << "status == " << status << endl;
+
+   }  /* |if (do_werckmeister3)|  */
+
+@q *** (3) @>
+
+   if (do_pythagorean)
+   {
+      status = pythagorean(frequency);
+
+      cerr << "status == " << status << endl;
+
+   }  /* |if (do_pythagorean)|  */
+
+@q ** (2) @>
+
    mysql_close(mysql);
    mysql_library_end();
- 
+
    printf("Exiting `main' successfully with return value 0.\n");
    
    return 0;
