@@ -71,7 +71,7 @@ turkish_tuning.dvi: turkish_tuning.tex turkish_tuning.eps
 .PHONY: run
 
 run: layout$(EXEEXT)
-	layout$(EXEEXT) -w 65 12
+	layout$(EXEEXT) -p 220
 
 .PHONY: clean
 
