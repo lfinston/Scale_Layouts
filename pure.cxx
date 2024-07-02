@@ -52,43 +52,47 @@ stringstream s;
 /* * (1) */
 
 
-
 int
 main(int argc, char *argv[])
 {
 /* ** (2) */
 
-   std::cerr << std::fixed;
-
    cerr << "Entering `pure'." << endl;
+
+   cerr << std::fixed;
 
    float fundamental = 110;
 
    float curr_frequency;
 
-   float comparison_val = 5.0;
+   float comparison_val = 3.0;
 
    int j, k;
 
    bool found = false;
 
+   int octave_ctr = 0;
+   bool octave_flag = false;
+
+   stringstream s;
+
    for (int i = 1; i <= 32; ++i)
    {
       curr_frequency = fundamental * i;
 
-      cerr << "curr_frequency == " << setprecision(0) << setw(4) << curr_frequency << "    ";
+      cerr <<  "curr_frequency == " << setprecision(0) << setw(4) << curr_frequency << "    ";
 
       while (curr_frequency > fundamental * 2.0)
       {
          curr_frequency /= 2.0;
       }  
 
-      cerr << " --> " << setprecision(5) << setfill('0') << curr_frequency << " ";
+      cerr <<  " --> " << setprecision(5) << setfill(' ') << curr_frequency << " ";
 
       if (curr_frequency == fundamental)
-         cerr << "(1/1) Fundamental";
+         cerr <<  "(1/1) Fundamental";
 
-      for (j = 2; j < 20; j++)
+      for (j = 2; j < 30; j++)
       {
           for (k = 1; k < j; k++)
           {
@@ -97,10 +101,13 @@ main(int argc, char *argv[])
 
               if (fabs(curr_frequency - ((j * fundamental) / k)) < comparison_val)
               {
-                 cerr << "(" << j << "/" << k << ") ";
+                 cerr <<  "(" << j << "/" << k << ") ";
 
                  if (j == 2 * k)
-                    cerr << "Octave";
+                 {
+                    cerr <<  "Octave " << ++octave_ctr;
+                    octave_flag = true;
+                 }
 
                  found = true;
                  break;
@@ -114,7 +121,17 @@ main(int argc, char *argv[])
           }
       }
 
-      cerr << endl;
+      cerr <<  endl;
+
+#if 0
+      if (octave_flag)
+      {
+         cerr << endl;
+         octave_flag = false;
+      }
+#endif 
+
+
    }
 
 
