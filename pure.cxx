@@ -61,7 +61,7 @@ main(int argc, char *argv[])
 
    cerr << std::fixed;
 
-   float fundamental = 110;
+   float fundamental = 120; // 110;
 
    float curr_frequency;
 
