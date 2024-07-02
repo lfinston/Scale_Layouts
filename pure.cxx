@@ -51,16 +51,40 @@ stringstream s;
 
 /* * (1) */
 
+
+
 int
 main(int argc, char *argv[])
 {
 /* ** (2) */
 
+   std::cerr << std::fixed;
+
    cerr << "Entering `pure'." << endl;
+
+   float fundamental = 110;
+
+   float curr_frequency;
 
    for (int i = 1; i <= 32; ++i)
    {
+      curr_frequency = fundamental * i;
 
+      
+
+      cerr << "curr_frequency == " << setprecision(0) << setw(4) << curr_frequency << "    ";
+
+      while (curr_frequency > fundamental * 2.0)
+      {
+         curr_frequency /= 2.0;
+      }  
+
+      cerr << " --> " << setprecision(5) << setfill('0') << curr_frequency;
+
+      if (curr_frequency == 220)
+         cerr << "    Octave";
+
+      cerr << endl;
    }
 
 
