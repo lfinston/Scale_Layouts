@@ -79,7 +79,7 @@ pure.o: pure.cxx
 prog: pure$((EXEEXT)
 
 run: pure$(EXEEXT)
-	pure$(EXEEXT)
+	./pure$(EXEEXT)
 
 # run: layout$(EXEEXT)
 # 	layout$(EXEEXT) -p 220

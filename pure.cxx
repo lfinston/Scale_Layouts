@@ -47,16 +47,26 @@ using namespace std;
 
 stringstream s;
 
-
 // (setq outline-regexp "/\\* [*\f]+")
 
 /* * (1) */
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
 /* ** (2) */
-   
 
+   cerr << "Entering `pure'." << endl;
+
+   for (int i = 1; i <= 32; ++i)
+   {
+
+   }
+
+
+/* ** (2) */
+
+   cerr << "Exiting `pure' successfully with return value 0." << endl;
 
    return 0;
 
