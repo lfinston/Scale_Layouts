@@ -68,10 +68,21 @@ turkish_tuning.dvi: turkish_tuning.tex turkish_tuning.eps
 	dvipdfmx $<
 
 
-.PHONY: run
+pure$(EXEEXT): pure.o
+	g++ -o $@ $^
 
-run: layout$(EXEEXT)
-	layout$(EXEEXT) -p 220
+pure.o: pure.cxx
+	g++ -c -g $<
+
+.PHONY: prog run
+
+prog: pure$((EXEEXT)
+
+run: pure$(EXEEXT)
+	pure$(EXEEXT)
+
+# run: layout$(EXEEXT)
+# 	layout$(EXEEXT) -p 220
 
 .PHONY: clean
 
