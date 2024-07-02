@@ -76,6 +76,46 @@ main(int argc, char *argv[])
 
    stringstream s;
 
+   float et_freq; // equal tempered
+
+   vector<float> et_vector;
+   et_vector.push_back(fundamental);  
+
+   float alpha = powf(2.0, 1.0/12.0);
+   float beta  = powf(2.0, 1.0/24.0);
+
+#if 0 
+   cerr << "alpha == " << alpha << endl
+        << "beta  == " << beta  << endl;
+#endif 
+
+/* ** (2) Calculate equal-tempered intervals.  */
+
+   float curr_freq = fundamental;
+
+   for (int i = 1; i <= 12; ++i)
+   {
+       curr_freq *= alpha;
+       et_vector.push_back(curr_freq);
+   }
+
+   cerr << "Equal-tempered intervals:" << endl;
+
+   j = 0;
+
+   for (vector<float>::iterator iter = et_vector.begin();
+        iter != et_vector.end();
+        ++iter) 
+   {
+       if (j == 7)
+          cerr << endl;
+ 
+       cerr << setfill(' ') << setw(2) << j++ << ". " << *iter << endl;      
+   }
+ 
+/* ** (2) */
+
+
    for (int i = 1; i <= 64; ++i)
    {
       if (i == 32)
@@ -91,7 +131,12 @@ main(int argc, char *argv[])
          curr_frequency /= 2.0;
       }  
 
-      s <<  "--> " << setprecision(5) << setfill(' ') << curr_frequency << " ";
+      
+         
+
+      s <<  "--> " << setprecision(5) << setfill(' ') 
+        << ((curr_frequency == 2 * fundamental) ? curr_frequency/2 : curr_frequency)
+        << " ";
 
       if (curr_frequency == fundamental)
       {
@@ -120,11 +165,33 @@ main(int argc, char *argv[])
 
                  else if (j == 3 && k == 2)
                  {
-                    s << "  Perfect fifth ";
+                    s << "  Perfect fifth.  " << "E.T. " << et_vector[7] << ", "
+                      << "Difference: "; 
+
+                    if (curr_frequency > et_vector[7])
+                       s << "+";
+                    else
+                       s << "-";
+
+                    s << fabs(curr_frequency - et_vector[7]);
+
                  }
                  else if (j == 5 && k == 4)
                  {
-                    s << "  Maj. 3rd ";
+                    s << "  Maj. 3rd.  "
+                      << "E.T. " << et_vector[4] << ", "
+                      << "Difference: "; 
+
+                    if (curr_frequency > et_vector[4])
+                       s << "+";
+                    else
+                       s << "-";
+
+                    s << fabs(curr_frequency - et_vector[4]);
+
+
+
+
                  }
                  else if (j == 7 && k == 4)
                  {
