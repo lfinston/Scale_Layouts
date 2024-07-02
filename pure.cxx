@@ -61,7 +61,7 @@ main(int argc, char *argv[])
 
    cerr << std::fixed;
 
-   float fundamental = 120; // 110;
+   float fundamental = 110; // 110;
 
    float curr_frequency;
 
@@ -195,7 +195,17 @@ main(int argc, char *argv[])
                  }
                  else if (j == 7 && k == 4)
                  {
-                    s << "  Min. 7th ";
+                    s << "  Min. 7th.  "
+                      << "E.T. " << et_vector[10] << ", "
+                      << "Difference: "; 
+
+                    if (curr_frequency > et_vector[10])
+                       s << "+";
+                    else
+                       s << "-";
+
+                    s << fabs(curr_frequency - et_vector[10]);
+
                  }
                  else if (j == 8 && k == 7)
                  {
