@@ -71,28 +71,37 @@ main(int argc, char *argv[])
 
    bool found = false;
 
-   int octave_ctr = 0;
+   int octave_ctr = 1;
    bool octave_flag = false;
 
    stringstream s;
 
-   for (int i = 1; i <= 32; ++i)
+   for (int i = 1; i <= 64; ++i)
    {
+      if (i == 32)
+       comparison_val /= 2;
+
       curr_frequency = fundamental * i;
 
-      cerr <<  "curr_frequency == " << setprecision(0) << setw(4) << curr_frequency << "    ";
+      s << setw(2) << setfill(' ') << i << ". "
+        << "curr_frequency == " << std::fixed << setprecision(0) << setw(4) << curr_frequency << " ";
 
       while (curr_frequency > fundamental * 2.0)
       {
          curr_frequency /= 2.0;
       }  
 
-      cerr <<  " --> " << setprecision(5) << setfill(' ') << curr_frequency << " ";
+      s <<  "--> " << setprecision(5) << setfill(' ') << curr_frequency << " ";
 
       if (curr_frequency == fundamental)
-         cerr <<  "(1/1) Fundamental";
+      {
+         s <<  "(1/1)   Fundamental (OCTAVE 1)" << endl;
+         cerr << s.str();
+         s.str("");
+         continue;
+      }
 
-      for (j = 2; j < 30; j++)
+      for (j = 2; j < 48; j++)
       {
           for (k = 1; k < j; k++)
           {
@@ -101,12 +110,66 @@ main(int argc, char *argv[])
 
               if (fabs(curr_frequency - ((j * fundamental) / k)) < comparison_val)
               {
-                 cerr <<  "(" << j << "/" << k << ") ";
+                 s << "(" << j << "/" << k << ") ";
 
-                 if (j == 2 * k)
+                 if (j == 2 && k == 1)
                  {
-                    cerr <<  "Octave " << ++octave_ctr;
+                    s << "  OCTAVE " << ++octave_ctr;
                     octave_flag = true;
+                 }
+
+                 else if (j == 3 && k == 2)
+                 {
+                    s << "  Perfect fifth ";
+                 }
+                 else if (j == 5 && k == 4)
+                 {
+                    s << "  Maj. 3rd ";
+                 }
+                 else if (j == 7 && k == 4)
+                 {
+                    s << "  Min. 7th ";
+                 }
+                 else if (j == 8 && k == 7)
+                 {
+                    s << "  Maj. 2nd ";
+                 }
+                 else if (j == 7 && k == 5)
+                 {
+                    s << "  Fourth (+) ";
+                 }
+                 else if (j == 8 && k == 5)
+                 {
+                    s << "  Maj. 6th ";
+                 }
+                 else if (j == 13 && k == 7)
+                 {
+                    s << " Maj. 7th ";
+                 }
+
+                 else if (j == 13 && k == 12)
+                 {
+                    s << "Min. 2nd ";
+                 }
+
+                 else if (j == 6 && k == 5)
+                 {
+                    s << "  Min. 3rd ";
+                 }
+
+                 else if (j == 4 && k == 3)
+                 {
+                    s << "  Fourth (-) ";
+                 }
+
+                 else if (j == 10 && k == 7)
+                 {
+                    s << " Dim. 5th ";
+                 }
+
+                 else if (j == 11 && k == 7)
+                 {
+                    s << " Min. 6th ";
                  }
 
                  found = true;
@@ -121,16 +184,16 @@ main(int argc, char *argv[])
           }
       }
 
-      cerr <<  endl;
+      s <<  endl;
 
-#if 0
       if (octave_flag)
       {
          cerr << endl;
          octave_flag = false;
       }
-#endif 
 
+      cerr << s.str();
+      s.str("");
 
    }
 
