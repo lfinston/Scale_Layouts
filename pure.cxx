@@ -66,11 +66,11 @@ main(int argc, char *argv[])
 
    float curr_frequency;
 
+   float comparison_val = 5.0;
+
    for (int i = 1; i <= 32; ++i)
    {
       curr_frequency = fundamental * i;
-
-      
 
       cerr << "curr_frequency == " << setprecision(0) << setw(4) << curr_frequency << "    ";
 
@@ -81,8 +81,88 @@ main(int argc, char *argv[])
 
       cerr << " --> " << setprecision(5) << setfill('0') << curr_frequency;
 
-      if (curr_frequency == 220)
+      if (curr_frequency == fundamental)
+         cerr << "    Fundamental";
+      else if (curr_frequency == 2*fundamental)
          cerr << "    Octave";
+      else if (curr_frequency == 3*fundamental/2)
+         cerr << "    Fifth (3/2)";
+      else if (fabs(curr_frequency - 4*fundamental/3) <= comparison_val)
+      {
+         cerr << "    Fourth (4/3)";
+      }
+      else if (fabs(curr_frequency - 5*fundamental/4) <= comparison_val)
+      {
+         cerr << "    Maj. 3rd (5/4)";
+      }
+      else if (fabs(curr_frequency - 6*fundamental/5) <= comparison_val)
+      {
+         cerr << "    (6/5)";
+      }
+      else if (fabs(curr_frequency - 7*fundamental/6) <= comparison_val)
+      {
+         cerr << "    (7/6)";
+      }
+      else if (fabs(curr_frequency - 8*fundamental/7) <= comparison_val)
+      {
+         cerr << "    (8/7)";
+      }
+      else if (fabs(curr_frequency - 9*fundamental/8) <= comparison_val)
+      {
+         cerr << "    (9/8)";
+      }
+      else if (fabs(curr_frequency - 10*fundamental/9) <= comparison_val)
+      {
+         cerr << "    (10/9)";
+      }
+      else if (fabs(curr_frequency - 11*fundamental/10) <= comparison_val)
+      {
+         cerr << "    (11/10)";
+      }
+      else if (fabs(curr_frequency - 12*fundamental/11) <= comparison_val)
+      {
+         cerr << "    (12/11)";
+      }
+      else if (fabs(curr_frequency - 13*fundamental/12) <= comparison_val)
+      {
+         cerr << "    (13/12)";
+      }
+      else if (fabs(curr_frequency - 14*fundamental/13) <= comparison_val)
+      {
+         cerr << "    (14/13)";
+      }
+      else if (fabs(curr_frequency - 15*fundamental/14) <= comparison_val)
+      {
+         cerr << "    (15/14)";
+      }
+      else if (fabs(curr_frequency - 16*fundamental/15) <= comparison_val)
+      {
+         cerr << "    (16/15)";
+      }
+      else if (fabs(curr_frequency - 5*fundamental/3) <= comparison_val)
+      {
+         cerr << "    Maj. 6th (5/3)";
+      }
+      else if (fabs(curr_frequency - 5*fundamental/2) <= comparison_val)
+      {
+         cerr << "    (5/2)";
+      }
+      else if (fabs(curr_frequency - 7*fundamental/5) <= comparison_val)
+      {
+         cerr << "    (7/5)";
+      }
+      else if (fabs(curr_frequency - 7*fundamental/4) <= comparison_val)
+      {
+         cerr << "    Min. 7th (7/4)";
+      }
+      else if (fabs(curr_frequency - 7*fundamental/3) <= comparison_val)
+      {
+         cerr << "    (7/3)";
+      }
+      else if (fabs(curr_frequency - 7*fundamental/2) <= comparison_val)
+      {
+         cerr << "    (7/2)";
+      }
 
       cerr << endl;
    }
