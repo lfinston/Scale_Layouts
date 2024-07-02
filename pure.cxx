@@ -68,6 +68,10 @@ main(int argc, char *argv[])
 
    float comparison_val = 5.0;
 
+   int j, k;
+
+   bool found = false;
+
    for (int i = 1; i <= 32; ++i)
    {
       curr_frequency = fundamental * i;
@@ -79,10 +83,51 @@ main(int argc, char *argv[])
          curr_frequency /= 2.0;
       }  
 
-      cerr << " --> " << setprecision(5) << setfill('0') << curr_frequency;
+      cerr << " --> " << setprecision(5) << setfill('0') << curr_frequency << " ";
 
       if (curr_frequency == fundamental)
-         cerr << "    Fundamental";
+         cerr << "(1/1) Fundamental";
+
+      for (j = 2; j < 20; j++)
+      {
+          for (k = 1; k < j; k++)
+          {
+              if ((j == k) || ((j % 2 == 0) && (k % 2 == 0)))
+                 continue;
+
+              if (fabs(curr_frequency - ((j * fundamental) / k)) < comparison_val)
+              {
+                 cerr << "(" << j << "/" << k << ") ";
+
+                 if (j == 2 * k)
+                    cerr << "Octave";
+
+                 found = true;
+                 break;
+              }
+          } /* inner for  */
+
+          if (found)
+          {
+             found = false;
+             break;
+          }
+      }
+
+      cerr << endl;
+   }
+
+
+/* ** (2) */
+
+   cerr << "Exiting `pure' successfully with return value 0." << endl;
+
+   return 0;
+
+}
+
+#if 0
+
       else if (curr_frequency == 2*fundamental)
          cerr << "    Octave";
       else if (curr_frequency == 3*fundamental/2)
@@ -94,6 +139,14 @@ main(int argc, char *argv[])
       else if (fabs(curr_frequency - 5*fundamental/4) <= comparison_val)
       {
          cerr << "    Maj. 3rd (5/4)";
+      }
+      else if (fabs(curr_frequency - 5*fundamental/3) <= comparison_val)
+      {
+         cerr << "    (5/3)";
+      }
+      else if (fabs(curr_frequency - 5*fundamental/3) <= comparison_val)
+      {
+         cerr << "    (5/3)";
       }
       else if (fabs(curr_frequency - 6*fundamental/5) <= comparison_val)
       {
@@ -164,17 +217,8 @@ main(int argc, char *argv[])
          cerr << "    (7/2)";
       }
 
-      cerr << endl;
-   }
+#endif 
 
-
-/* ** (2) */
-
-   cerr << "Exiting `pure' successfully with return value 0." << endl;
-
-   return 0;
-
-}
 
 /* * Emacs-Lisp code for use in indirect buffers when using the          */
 /*   GNU Emacs editor.  The local variable list is not evaluated when an */
